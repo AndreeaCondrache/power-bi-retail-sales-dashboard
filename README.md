@@ -14,4 +14,4 @@ Acest proiect prezintă un dashboard interactiv realizat în Power BI pentru ana
 - **Power Query** (Curățare și transformare date)
 
 ## 📷 Previzualizare Dashboard
-![Dashboard Preview](dashboard.png)
+![Dashboard Preview](images/dashboard.png)
