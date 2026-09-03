@@ -1,0 +1,28 @@
+table 'Procent Creștere Preț'
+	lineageTag: d234fa7d-4500-422b-89c7-d615c613f6e1
+
+	measure 'Procent Creștere Preț Value' = SELECTEDVALUE('Procent Creștere Preț'[Procent Creștere Preț], 0.05)
+		lineageTag: da2b09d5-6478-415b-ba25-2a84120623ee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Procent Creștere Preț'
+		lineageTag: 2b3a9d87-0a91-4f50-bf2b-f20b8d31206c
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Procent Creștere Preț' = calculated
+		mode: import
+		source = GENERATESERIES(0, 0.2, 0.01)
+
+	annotation PBI_Id = 45208058687c470ca03e79e496376719
+

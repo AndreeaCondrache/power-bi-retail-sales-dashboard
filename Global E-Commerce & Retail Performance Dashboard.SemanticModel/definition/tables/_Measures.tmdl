@@ -1,0 +1,62 @@
+table _Measures
+	lineageTag: 33ac0106-4b79-4673-86f7-b60d56411a4c
+
+	measure 'Total Revenue' = SUM(Sales[Revenue])
+		formatString: 0
+		lineageTag: 67ff603a-6dd0-4316-a581-c4269d32e773
+
+	measure 'Total Cost' = SUM(Sales[Cost])
+		formatString: 0
+		lineageTag: 5f0df3e7-edd7-43b4-a4d9-0dce19518af4
+
+	measure 'Total Profit' = SUM(Sales[Profit])
+		formatString: 0
+		lineageTag: cf836315-74f0-4afc-a7fb-189bd38c10e4
+
+	measure 'Total Orders' = COUNTROWS(Sales)
+		formatString: 0
+		lineageTag: 74476ff0-7688-46d0-83df-d6611b197723
+
+	measure AOV = DIVIDE([Total Revenue], [Total Orders], 0)
+		lineageTag: ccdfff0c-2432-4b3d-91ba-29674cecd4f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Profit Margin %' = DIVIDE([Total Profit], [Total Revenue], 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: ea4c445f-cfd3-4677-b662-59dda90714c9
+
+	measure 'Simulated Revenue' = [Total Revenue] * (1 + 'Procent Creștere Preț'[Procent Creștere Preț Value])
+		lineageTag: 8a96362c-c1d0-4196-8fc5-e67046103912
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Simulated Profit' = [Simulated Revenue] - [Total Cost]
+		lineageTag: bedfac05-ca5f-43b5-b972-b9fd72870230
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Profit Delta' = [Simulated Profit] - [Total Profit]
+		lineageTag: 623cc953-d31d-4529-b9e2-7f1864850ce7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column1
+		dataType: string
+		lineageTag: 1daef0fd-994b-412d-965a-4bc0dfec66a1
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

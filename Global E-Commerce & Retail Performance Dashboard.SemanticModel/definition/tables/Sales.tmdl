@@ -1,0 +1,176 @@
+table Sales
+	lineageTag: 319eb2fb-534d-4395-b8c9-55ea73721774
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c023252d-18c2-44be-8e9d-253ca91eddff
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 31c657c1-740e-4add-87bb-91f69237290d
+			defaultHierarchy: LocalDateTable_7ab2b527-4798-452f-8422-a78a51647b6b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 2eb52e3f-cf00-4f58-ac43-a815ce741758
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: f38d7a29-7c3a-48cd-87c6-83f43c214dde
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 82e451b5-5f75-4076-84e6-8e235d72ffc1
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Age
+		dataType: int64
+		formatString: 0
+		lineageTag: d4f1f385-376a-4431-a348-c5b2d9628cf0
+		summarizeBy: sum
+		sourceColumn: Customer_Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age_Group
+		dataType: string
+		lineageTag: f1bf4a1e-4f92-46e6-ace2-58bc1d161ec7
+		summarizeBy: none
+		sourceColumn: Age_Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Gender
+		dataType: string
+		lineageTag: f2f4c4f2-1d95-458e-b3f2-bcdfc8e852ea
+		summarizeBy: none
+		sourceColumn: Customer_Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 5431b9c4-9833-45cb-9d63-cec6de0afa8c
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 7624fa7e-a6c8-4831-86fd-c302aca30310
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Category
+		dataType: string
+		lineageTag: 859b9d4c-51ad-499a-b493-a78e051f1a04
+		summarizeBy: none
+		sourceColumn: Product_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub_Category
+		dataType: string
+		lineageTag: 8d8c3dbd-e4fe-4799-830e-7efcdde014d8
+		summarizeBy: none
+		sourceColumn: Sub_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: ebb6cad8-2e53-4391-af1d-f9eb3496c032
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 08361f2b-d977-4daa-8307-a7d47e6ca698
+		summarizeBy: sum
+		sourceColumn: Order_Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit_Cost
+		dataType: int64
+		formatString: 0
+		lineageTag: 948739be-481a-4653-8e8a-db79a9de0e78
+		summarizeBy: sum
+		sourceColumn: Unit_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit_Price
+		dataType: int64
+		formatString: 0
+		lineageTag: b7d63579-7b85-4175-a4c7-177fe4470522
+		summarizeBy: sum
+		sourceColumn: Unit_Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit
+		dataType: int64
+		formatString: 0
+		lineageTag: 309c50ee-6796-4451-81a8-51484c6da4ac
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cost
+		dataType: int64
+		formatString: 0
+		lineageTag: 67783e44-ac93-495f-97cb-59bfaf0fc58e
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: b99c556c-e552-47f0-8e82-a78b84639392
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\andre\Downloads\CURSURI\Global E-Commerce & Retail Performance Dashboard\Sales.csv"),[Delimiter=",", Columns=18, Encoding=1250, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Day", Int64.Type}, {"Month", type text}, {"Year", Int64.Type}, {"Customer_Age", Int64.Type}, {"Age_Group", type text}, {"Customer_Gender", type text}, {"Country", type text}, {"State", type text}, {"Product_Category", type text}, {"Sub_Category", type text}, {"Product", type text}, {"Order_Quantity", Int64.Type}, {"Unit_Cost", Int64.Type}, {"Unit_Price", Int64.Type}, {"Profit", Int64.Type}, {"Cost", Int64.Type}, {"Revenue", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

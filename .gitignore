@@ -1,0 +1,7 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+# Excludem fișiere temporare Power BI
+*.tmp
+*.lock
+
+

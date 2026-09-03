@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Global E-Commerce & Retail Performance Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "231cf365-0208-470c-916c-f3b53e81d197"
+  }
+}

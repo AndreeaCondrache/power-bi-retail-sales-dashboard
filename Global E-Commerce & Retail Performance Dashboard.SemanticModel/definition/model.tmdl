@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: ro-RO
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Sales","_Measures"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Sales
+ref table DateTableTemplate_5525b1a8-4d88-4ffc-ac50-25953aeabac9
+ref table LocalDateTable_7ab2b527-4798-452f-8422-a78a51647b6b
+ref table _Measures
+ref table 'Procent Creștere Preț'
+
+ref cultureInfo en-US
+
